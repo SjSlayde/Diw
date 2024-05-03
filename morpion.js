@@ -53,16 +53,16 @@ function joueurvsbot (N){
             if(bouton[random].innerHTML!=""){
                 random = Math.floor(Math.random() *9)
             }
-            else{1
+            else{
                 break;
             }
         }
-        console.log(random)
-        tour++
+        console.log(random);
+        tour++;
         bouton[random].innerHTML = "X";
-        changecolor (random)
-        VX= "X"
-        checkwin()
+        changecolor (random);
+        VX= "X";
+        checkwin();
 }
 
 function changecolor(N){//change la couleur du bouton
