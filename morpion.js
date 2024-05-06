@@ -47,7 +47,8 @@ function joueurvsjoueur (N) {//2 joueurs
     }
 }
 
-function joueurvsbot (N){
+function joueurvsbot (N){//bot faut que je trouve un moyen de faire en sorte que le bot ne joue pas quand la partie est terminer.
+    let random;
         for(let i= 0;i<10;i++){
             random = Math.floor(Math.random() *9)
             if(bouton[random].innerHTML!=""){
