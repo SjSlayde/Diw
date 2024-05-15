@@ -8,7 +8,7 @@
 <body>
     <?php 
     $test = "Afbfqf54";//mot de passe a tester 
-    $resultat = chekmdp($test);//stocke le resultat
+    $resultat = complex_password($test);//stocke le resultat
     
     if($resultat){
         echo "mot de passe valide";
@@ -17,7 +17,7 @@
         echo "mot de passe invalide";
     }//j'aurai puys mettre un else mais vue qu'il faut un moyen de regarder si le false s'envoye bien pour l'exo
     
-    function chekmdp($motdepasse){
+    function complex_password($motdepasse){
     $majfiltre = "/[A-Z]/";//filtre regexp
     $chiffrefiltre = "/[0-9]/";
     if(strlen($motdepasse)==8 and preg_match($majfiltre ,$motdepasse)==1 and preg_match($chiffrefiltre ,$motdepasse)==1){//check si toute est en ordre

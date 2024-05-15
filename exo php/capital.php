@@ -7,6 +7,7 @@
 </head>
 <body>
     <?php 
+    
     $capitales = array(
         "Bucarest" => "Roumanie",
         "Bruxelles" => "Belgique",
@@ -67,22 +68,30 @@
         "Vilnius" => "Lituanie",
         "Zagreb" => "Croatie"
     );
+    
     asort($capitales);
+    
     foreach($capitales as $key => $ville){
         echo "Le pays qui a ".$key." pour capitale est : ".$ville.".<br>";
     };
+    
+    echo "<br>";
+    
     natsort($capitales);
     ksort($capitales);
+    
     foreach($capitales as $key => $ville){
         echo "La capitale de ".$key." est : ".$ville.".<br>";
     };
+    echo "<br>";
 
     echo "le nombre de pays est de :".count($capitales); 
 
+    echo "<br>";
 
-    $capitales_triees = array_filter($capitales, function($capital, $country) {
+    $capitales_triees = array_filter($capitales, function($ville) {
 
-        return strpos(strtolower($capital), 'b') === 0;
+        return strpos(strtolower($ville), 'b') === 0;
     
     }, ARRAY_FILTER_USE_BOTH);
 
@@ -90,15 +99,20 @@
 foreach($capitales_triees as $key => $ville){
     echo "La capitale de ".$key." est : ".$ville.".<br>";
 }
+
 echo "<br>";
+
 $departements = array(
     "Hauts-de-france" => array("Aisne", "Nord", "Oise", "Pas-de-Calais", "Somme"),
     "Bretagne" => array("Côtes d'Armor", "Finistère", "Ille-et-Vilaine", "Morbihan"),
     "Grand-Est" => array("Ardennes", "Aube", "Marne", "Haute-Marne", "Meurthe-et-Moselle", "Meuse", "Moselle", "Bas-Rhin", "Haut-Rhin", "Vosges"),
     "Normandie" => array("Calvados", "Eure", "Manche", "Orne", "Seine-Maritime")
 );
+
 echo "<br>";
+
 ksort($departements);
+
 foreach($departements as $key => $region){
     echo "<br>".$key." nombre de region ".count($departements[$key]).":<br>";
     $test = $departements[$key];
@@ -107,7 +121,9 @@ foreach($departements as $key => $region){
     }
     echo "<br>";
 };
+
 bonjour("le monde");
+
 function bonjour($prenom) 
 {
     echo "Bonjour ".$prenom;
