@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="fr">
 
 <!DOCTYPE html>
 <html lang="fr">
