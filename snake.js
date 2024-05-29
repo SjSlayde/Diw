@@ -21,6 +21,7 @@ let score = 0
 // Variable pour stocker la direction du serpent
 let d 
 
+let start = 0
 // Écouteur d'événement pour détecter les flèches du clavier
 document.addEventListener("keydown",direction);
 
@@ -36,13 +37,17 @@ function direction(event){
     } else if (key == 40 && d != "UP"){
         d = "DOWN"
     }
-    // Initialisation de l'intervalle de jeu
-        let game = setInterval(draw, 1000)
     // Appel de la fonction de dessin avec la nouvelle direction
+    if(start==0){
+        start++
+    // Initialisation de l'intervalle de jeu
+    let game = setInterval(draw, 100)}
 }
-
+//sert juste a eviter les erreur pour l'instant
+let game = setInterval(draw, 100)
 let snakeX 
 let snakeY 
+
 
 // Fonction de dessin
 function draw (){
@@ -56,6 +61,9 @@ function draw (){
         context.fillRect(snake[i].x, snake[i].y, box, box)
         context.strokeStyle = "red"
         context.strokeRect(snake[i].x, snake[i].y, box, box)
+        // if(snake[i].x == 0 || snake[i].y == 0 || snake[0].x == snake[i].x || snake[0].y == snake[i].y){
+        //     alert("loose")
+        // }
     }
     // Dessin de la nourriture
     context.fillStyle = "orange"
@@ -65,10 +73,10 @@ function draw (){
     let snakeX = snake[0].x
     let snakeY = snake[0].y
 
-    if(d == "LEFT" && snake[0].x - 20 >= 0 ) snakeX -= box;
-    if(d == "UP" && snake[0].y - 20 >= 0 ) snakeY -= box;
-    if(d == "RIGHT" && snake[0].x + 40 <= canvas.width) snakeX += box;
-    if(d == "DOWN" && snake[0].y + 40 <= canvas.height) snakeY += box;
+    if(d == "LEFT") snakeX -= box;
+    if(d == "UP") snakeY -= box;
+    if(d == "RIGHT") snakeX += box;
+    if(d == "DOWN") snakeY += box;
 
        // Suppression du dernier segment du serpent
     if(snakeX != food.x || snakeY != food.y){
@@ -87,31 +95,35 @@ function draw (){
         x: snakeX,
         y: snakeY
     }
+    console.log(snakeX+" x  "+snakeY+" Y ")
 
     snake.unshift(newHead)
-
-    // Vérification de la collision avec les bords de l'écran
-    if(snakeX > 0 || snakeY > 0 || snakeX > 19*box || snakeY > 19*box || collision(newHead, snake)){
-        clearInterval(game);
-    }
 
     // Affichage du score
     context.fillStyle= "red"
     context.font = "30px Arial"
     context.fillText(score, 2*box, 1.6*box)
+    
+    // Vérification de la collision avec les bords de l'écran
+   if(snakeX > 0 || snakeY > 0 || snakeX < 19*box || snakeY < 19*box || collision(newHead, snake)){
+       alert('loose')
+    }
+    
 }
 
 // Vérification de la collision
-function collision(head, array){
-    console.log("toucher")
-    for(let i = 0; i < array.length; i++){
-        if((head.x == array[i].x && head.y == array[i].y) || (array[i].x < 0 || array[i].y < 0 || array[i].x > canvas.width || array[i].y > canvas.height)){
-            alert("loose")
-            return true
-        }
-    }
-    return false
-}
+// function collision(head, array){
+//     for(let i = 0; i < array.length; i++){
+//         if((head.x == array[i].x && head.y == array[i].y) || (array[i].x < 0 || array[i].y < 0 || array[i].x > canvas.width || array[i].y > canvas.height)){
+//             alert("loose2")
+//             return true
+//         }
+//     }
+//     return false
+// }
 
-// Initialisation de l'intervalle de jeu
- let game = setInterval(draw, 1000)
+// ancienne commande de direction
+// if(d == "LEFT" && snake[0].x - 20 >= 0 ) snakeX -= box;
+// if(d == "UP" && snake[0].y - 20 >= 0 ) snakeY -= box;
+// if(d == "RIGHT" && snake[0].x + 40 <= canvas.width) snakeX += box;
+// if(d == "DOWN" && snake[0].y + 40 <= canvas.height) snakeY += box;
