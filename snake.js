@@ -41,10 +41,10 @@ function direction(event){
     if(start==0){
         start++
     // Initialisation de l'intervalle de jeu
-    let game = setInterval(draw, 100)}
+    let game = setInterval(draw, 200)}
 }
 //sert juste a eviter les erreur pour l'instant
-let game = setInterval(draw, 100)
+let game = setInterval(draw, 200)
 let snakeX 
 let snakeY 
 
@@ -61,17 +61,14 @@ function draw (){
         context.fillRect(snake[i].x, snake[i].y, box, box)
         context.strokeStyle = "red"
         context.strokeRect(snake[i].x, snake[i].y, box, box)
-        // if(snake[i].x == 0 || snake[i].y == 0 || snake[0].x == snake[i].x || snake[0].y == snake[i].y){
-        //     alert("loose")
-        // }
     }
     // Dessin de la nourriture
     context.fillStyle = "orange"
     context.fillRect(food.x, food.y, box, box)
 
     // Déplacement de la tête du serpent
-    let snakeX = snake[0].x
-    let snakeY = snake[0].y
+    snakeX = snake[0].x
+    snakeY = snake[0].y
 
     if(d == "LEFT") snakeX -= box;
     if(d == "UP") snakeY -= box;
@@ -95,8 +92,9 @@ function draw (){
         x: snakeX,
         y: snakeY
     }
+    
     console.log(snakeX+" x  "+snakeY+" Y ")
-
+    
     snake.unshift(newHead)
 
     // Affichage du score
@@ -105,24 +103,22 @@ function draw (){
     context.fillText(score, 2*box, 1.6*box)
     
     // Vérification de la collision avec les bords de l'écran
-   if(snakeX > 0 || snakeY > 0 || snakeX < 19*box || snakeY < 19*box || collision(newHead, snake)){
-       alert('loose')
+   if(snakeX < 0 || snakeY < 0 || snakeX > 19*box || snakeY > 19*box || collision(newHead, snake)){
+    location.reload()
     }
-    
 }
 
-// Vérification de la collision
-// function collision(head, array){
-//     for(let i = 0; i < array.length; i++){
-//         if((head.x == array[i].x && head.y == array[i].y) || (array[i].x < 0 || array[i].y < 0 || array[i].x > canvas.width || array[i].y > canvas.height)){
-//             alert("loose2")
-//             return true
-//         }
-//     }
-//     return false
-// }
+//Vérification de la collision
+function collision(head, array){
+    for(let i = 1; i < array.length; i++){
+        if(head.x == array[i].x && head.y == array[i].y){
+            return true
+        }
+    }
+    return false
+}
 
-// ancienne commande de direction
+// ancienne commande de direction pour empecher le snake de sortir de la case
 // if(d == "LEFT" && snake[0].x - 20 >= 0 ) snakeX -= box;
 // if(d == "UP" && snake[0].y - 20 >= 0 ) snakeY -= box;
 // if(d == "RIGHT" && snake[0].x + 40 <= canvas.width) snakeX += box;
